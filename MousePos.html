@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Mouse Position</title>
+    </head>
+    <body>
+        <p>The mouse is located at position (" <span id="xPos"></span>
+            ","
+            <span id="yPos"></span>
+            "), and is "
+            <span id="dist"></span>
+            " pixels from the lower-left corner.
+        </p>
+        <script>
+
+            var x;
+            var y;
+            var dist;
+
+            document.addEventListener("mousemove",function(event){
+                console.log(event);
+                updateXY(event);
+
+                dist = Math.sqrt(x**2 + y**2);
+                document.querySelector('#dist').textContent=dist;
+            })
+
+            function updateXY(event){
+                x = event.pageX;
+                y=event.pageY;
+
+                document.querySelector('#xPos').textContent=x;
+                document.querySelector('#yPos').textContent= y;
+            }
+        </script>
+    </body>
+</html>
+
+<!-- 
+    -- The id attributes in the HTML elements should not include the # 
+    -- the function on the document takes in the event but the updateXY function wasn't. I included the event within the updateXY() to use it when updating x and y.
+    -- The variables within the updateXY() are declared within the function meaning that they can only be accessed from within that function. So I moved their declaration out of the function to give them a global scope.
+    -- dist is never declared so I added that declaration
+    -- I changed the format of the original code to use the .addEventListener instead
+    -- and fill in the span elements using .textContent
+
+    -- I added the log statement at the beginnign to make sure the event was being logged
+ -->
