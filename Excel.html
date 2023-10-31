@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Data Visualizer</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+        <script type= "text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+        <script src="script.js"></script>
+    </head>
+        
+        <body>
+            <h1>Data Visualizer</h1>
+
+            <input type="file" id="input" accept=".xls,.xlsx">
+            <button class = "btn btn-primary" id="button" onclick="initial_view('#initial')">Convert</button>
+        
+            <div id= "view_widget">
+                
+            </div>
+
+        </body>
+
+
+    <script id="initial" type= "text/x-handlebars-template">
+        <br><br>
+        <div class = "initial_input">
+        <input id = "pitcherInput" type="text" placeholder="Pitcher Name/ID">
+        <input id = "batterInput" type="text" placeholder="Batter Name/ID">
+        <br><br>
+        <button id="submit" onclick="handle_submit_event()">Submit</button>
+        <button id="next">Next</button>
+    </div>
+   </script>
+
+   <script id="player_info" type= "text/x-handlebars-template">
+        <div class= "player info">
+            <br><br>
+        <div class="container">
+            <div class="players">
+                <div class = "batter_info">
+                    <h4 class="batter_name">Batter Name: {{BATTER}}</h4>
+                    <img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_213,q_auto:best/v1/people/{{BATTER_ID}}/headshot/67/current" alt="{{BATTER}}">
+                </div>
+                
+                <div class = "pitcher_info">
+                    <h4 class= "pitcher_name">Pitcher Name: {{PITCHER}}</h4>
+                    <img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_213,q_auto:best/v1/people/{{PITCHER_ID}}/headshot/67/current" alt="{{PITCHER}}">
+                </div>
+            <br><br>
+            </div>
+
+            <div class="play_outcome">
+                <h4 class="outcome">Play Outcome: {{PLAY_OUTCOME}}</h4>
+                <br><br>
+                <h4>Play Stats</h4>
+            </div>
+        </div> 
+            <table>
+                
+                <tr>
+                    <th>Exit Direction</th>
+                    <th>Exit Speed</th>
+                    <th>Hang Time</th>
+                    <th>Hit Distance</th>
+                    <th>Hit Spin-Rate</th>
+                    <th>Launch Angle</th>
+                </tr>
+                <tr>
+                    <td>{{EXIT_DIRECTION}}</td>
+                
+               
+                    <td>{{EXIT_SPEED}}</td>
+                
+                
+                    <td>{{HANG_TIME}}</td>
+                
+                
+                    <td>{{HIT_DISTANCE}}</td>
+                
+                
+                    <td>{{HIT_SPIN_RATE}}</td>
+                
+                
+                    <td>{{LAUNCH_ANGLE}}</td>
+                </tr>
+            </table>
+            <br><br>
+            <div class="frame">
+            <video src="{{VIDEO_LINK}}" controls></video>
+            </div>
+            <br><br>
+            <button id = "back" onclick="initial_view('#initial')">Back</button>
+        </div>
+   </script>
+</html>
